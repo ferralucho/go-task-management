@@ -1,0 +1,10 @@
+app:
+  name: 'go-task-management'
+  version: '1.0.0'
+
+http:
+  port: '8082'
+
+logger:
+  log_level: 'debug'
+  rollbar_env: 'go-task-management'
