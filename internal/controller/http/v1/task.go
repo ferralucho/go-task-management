@@ -11,11 +11,11 @@ import (
 )
 
 type taskRoutes struct {
-	t usecase.CardUseCase
+	t usecase.Card
 	l logger.Interface
 }
 
-func newTaskRoutes(handler *gin.RouterGroup, t usecase.CardUseCase, l logger.Interface) {
+func newTaskRoutes(handler *gin.RouterGroup, t usecase.Card, l logger.Interface) {
 	r := &taskRoutes{t, l}
 
 	h := handler.Group("/management")
