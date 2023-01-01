@@ -15,6 +15,25 @@ type Task struct {
 	Category string `json:"category"`
 }
 
+type InternalCard struct {
+	Name string `json:"name,required"`
+	Desc string `json:"desc"`
+}
+
+type Card struct {
+	Name      string   `json:"name,required"`
+	Desc      string   `json:"desc"`
+	IdList    string   `json:"idList,required"`
+	IdLabels  []string `json:"idLabels,required"`
+	ShortLink string   `json:"shortLink"`
+	ShortURL  string   `json:"shortUrl"`
+	URL       string   `json:"url"`
+}
+
+type TaskRequest struct {
+	Type string `json:"type,required"`
+}
+
 type Category string
 
 const (
