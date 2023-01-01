@@ -74,13 +74,6 @@ func (r *taskRoutes) doCreateTask(c *gin.Context) {
 		return
 	}
 
-	/*	if err != nil {
-		r.l.Error(err, "http - v1 - doCreateTask")
-		errorResponse(c, http.StatusInternalServerError, err.Error())
-
-		return
-	}*/
-
 	if err == nil {
 		c.JSON(http.StatusOK, card)
 	}
@@ -95,6 +88,11 @@ func processBug(c *gin.Context, r *taskRoutes, card entity.Card, err error) (ent
 	}
 
 	card, err = r.t.CreateBug(c.Request.Context(), bug)
+	if err != nil {
+		r.l.Error(err, "http - v1 - processBug")
+		errorResponse(c, http.StatusInternalServerError, err.Error())
+		return entity.Card{}, errors.New("invalid bug request")
+	}
 	return card, err
 }
 
@@ -107,6 +105,12 @@ func processIssue(c *gin.Context, r *taskRoutes, card entity.Card, err error) (e
 	}
 
 	card, err = r.t.CreateIssue(c.Request.Context(), issue)
+
+	if err != nil {
+		r.l.Error(err, "http - v1 - processIssue")
+		errorResponse(c, http.StatusInternalServerError, err.Error())
+		return entity.Card{}, errors.New("invalid bug request")
+	}
 	return card, err
 }
 
@@ -119,5 +123,11 @@ func processTask(c *gin.Context, r *taskRoutes, card entity.Card, err error) (en
 	}
 
 	card, err = r.t.CreateTask(c.Request.Context(), task)
+	if err != nil {
+		r.l.Error(err, "http - v1 - processTask")
+		errorResponse(c, http.StatusInternalServerError, err.Error())
+		return entity.Card{}, errors.New("invalid bug request")
+	}
+
 	return card, err
 }
