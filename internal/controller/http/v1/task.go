@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"errors"
+	"github.com/gin-gonic/gin/binding"
 	"net/http"
 	"strings"
 
@@ -50,7 +52,7 @@ type taskResponse struct {
 // @Router      /task [post]
 func (r *taskRoutes) doCreateTask(c *gin.Context) {
 	var request createTaskRequest
-	if err := c.ShouldBindJSON(&request); err != nil {
+	if err := c.ShouldBindBodyWith(&request, binding.JSON); err != nil {
 		r.l.Error(err, "http - v1 - doCreateTask")
 		errorResponse(c, http.StatusBadRequest, "invalid request body")
 
@@ -72,23 +74,24 @@ func (r *taskRoutes) doCreateTask(c *gin.Context) {
 		return
 	}
 
-	if err != nil {
+	/*	if err != nil {
 		r.l.Error(err, "http - v1 - doCreateTask")
-		errorResponse(c, http.StatusInternalServerError, "tasks service problem")
+		errorResponse(c, http.StatusInternalServerError, err.Error())
 
 		return
-	}
+	}*/
 
-	c.JSON(http.StatusOK, card)
+	if err == nil {
+		c.JSON(http.StatusOK, card)
+	}
 }
 
 func processBug(c *gin.Context, r *taskRoutes, card entity.Card, err error) (entity.Card, error) {
 	var bug entity.Bug
-	if e := c.ShouldBindJSON(&bug); e != nil {
+	if e := c.ShouldBindBodyWith(&bug, binding.JSON); e != nil {
 		r.l.Error(e, "http - v1 - doCreateTask")
-		errorResponse(c, http.StatusBadRequest, "invalid request bug")
-
-		return entity.Card{}, nil
+		errorResponse(c, http.StatusBadRequest, "invalid bug request")
+		return entity.Card{}, errors.New("invalid bug request")
 	}
 
 	card, err = r.t.CreateBug(c.Request.Context(), bug)
@@ -97,11 +100,10 @@ func processBug(c *gin.Context, r *taskRoutes, card entity.Card, err error) (ent
 
 func processIssue(c *gin.Context, r *taskRoutes, card entity.Card, err error) (entity.Card, error) {
 	var issue entity.Issue
-	if e := c.ShouldBindJSON(&issue); e != nil {
+	if e := c.ShouldBindBodyWith(&issue, binding.JSON); e != nil {
 		r.l.Error(e, "http - v1 - doCreateTask")
-		errorResponse(c, http.StatusBadRequest, "invalid request issue")
-
-		return entity.Card{}, nil
+		errorResponse(c, http.StatusBadRequest, "invalid issue request")
+		return entity.Card{}, errors.New("invalid issue request")
 	}
 
 	card, err = r.t.CreateIssue(c.Request.Context(), issue)
@@ -110,11 +112,10 @@ func processIssue(c *gin.Context, r *taskRoutes, card entity.Card, err error) (e
 
 func processTask(c *gin.Context, r *taskRoutes, card entity.Card, err error) (entity.Card, error) {
 	var task entity.Task
-	if e := c.ShouldBindJSON(&task); e != nil {
+	if e := c.ShouldBindBodyWith(&task, binding.JSON); e != nil {
 		r.l.Error(e, "http - v1 - doCreateTask")
-		errorResponse(c, http.StatusBadRequest, "invalid request task")
-
-		return entity.Card{}, nil
+		errorResponse(c, http.StatusBadRequest, "invalid task request")
+		return entity.Card{}, errors.New("invalid task request")
 	}
 
 	card, err = r.t.CreateTask(c.Request.Context(), task)
