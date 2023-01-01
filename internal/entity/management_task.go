@@ -6,7 +6,6 @@ type Issue struct {
 }
 
 type Bug struct {
-	Title       string `json:"title"`
 	Description string `json:"description,required"`
 }
 
@@ -16,8 +15,9 @@ type Task struct {
 }
 
 type InternalCard struct {
-	Name string `json:"name,required"`
-	Desc string `json:"desc"`
+	Name     string   `json:"name,required"`
+	Desc     string   `json:"desc"`
+	IdLabels []string `json:"idLabels,required"`
 }
 
 type Card struct {
