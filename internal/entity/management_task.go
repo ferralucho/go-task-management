@@ -30,10 +30,6 @@ type Card struct {
 	URL       string   `json:"url"`
 }
 
-type TaskRequest struct {
-	Type string `json:"type,required"`
-}
-
 type Category string
 
 const (
