@@ -10,6 +10,7 @@ logger:
   rollbar_env: 'go-task-management'
 
 trello:
-  trello_developer_public_key: ''
-  trello_member_token: ''
-  trello_username: ''
+  trello_developer_public_key:
+  trello_member_token:
+  trello_username:
+  trello_board: 'space-tasks'

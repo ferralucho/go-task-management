@@ -11,6 +11,7 @@ import (
 type TrelloApi struct {
 	Client   *trello.Client
 	Username string
+	Board    string
 }
 
 // New -.
@@ -20,6 +21,7 @@ func New(cfg *config.Config) *TrelloApi {
 	return &TrelloApi{
 		Client:   c,
 		Username: cfg.Trello.Username,
+		Board:    cfg.Trello.MemberBoard,
 	}
 }
 
@@ -30,9 +32,15 @@ func (r *TrelloApi) CreateCard(ctx context.Context, card entity.InternalCard) (e
 		return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetMember: %w", err)
 	}
 
-	board, err := r.Client.GetBoard("bOaRdID", trello.Defaults())
+	boards, err := member.GetBoards(trello.Defaults())
 	if err != nil {
-		return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetBoard: %w", err)
+		return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetBoards: %w", err)
+	}
+	var board *trello.Board
+	for _, v := range boards {
+		if v.Name == r.Board {
+			board = v
+		}
 	}
 
 	lists, err := board.GetLists(trello.Defaults())

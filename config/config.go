@@ -37,6 +37,7 @@ type (
 		PublicKey   string `env-required:"true" yaml:"trello_developer_public_key"   env:"TRELLO_DEVELOPER_PUBLIC_KEY"`
 		MemberToken string `env-required:"true" yaml:"trello_member_token"   env:"TRELLO_MEMBER_TOKEN"`
 		Username    string `env-required:"true" yaml:"trello_username"   env:"TRELLO_USERNAME"`
+		MemberBoard string `env-required:"true" yaml:"trello_board"   env:"TRELLO_board"`
 	}
 )
 
@@ -64,6 +65,10 @@ func NewConfig() (*Config, error) {
 
 	if cfg.Trello.Username == "" {
 		cfg.Trello.Username = os.Getenv("trello_username")
+	}
+
+	if cfg.Trello.MemberBoard == "" {
+		cfg.Trello.MemberBoard = os.Getenv("trello_board")
 	}
 
 	return cfg, nil
