@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "960176db-61a9-4f60-9383-9fbcead33701",
+		"name": "trello-task-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8082",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/healthz",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"healthz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"task\",\r\n    \"title\": \"Clean the rocket\",\r\n    \"category\": \"Maintenance\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/v1/management/task",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1",
+						"management",
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create issue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"issue\",\r\n    \"title\": \"Send message\",\r\n    \"description\": \"Let pilots send messages to central\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/v1/management/task",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1",
+						"management",
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create bug",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"bug\",\r\n    \"description\": \"Cockpit is not depressurising correctly\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/v1/management/task",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1",
+						"management",
+						"task"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
