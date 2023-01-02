@@ -27,7 +27,7 @@ func New(cfg *config.Config) *TrelloApi {
 func (r *TrelloApi) CreateCard(ctx context.Context, card entity.InternalCard) (entity.Card, error) {
 	member, err := r.Client.GetMember(r.Username, trello.Defaults())
 	if err != nil {
-		return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetLists: %w", err)
+		return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetMember: %w", err)
 	}
 
 	board, err := r.Client.GetBoard("bOaRdID", trello.Defaults())
@@ -56,7 +56,9 @@ func (r *TrelloApi) CreateCard(ctx context.Context, card entity.InternalCard) (e
 
 	ca := &trello.Card{Name: card.Name, Desc: card.Desc, IDLabels: card.IdLabels, IDMembers: []string{memberToAssign}}
 	if list != nil {
-		list.AddCard(ca, trello.Defaults())
+		if e := list.AddCard(ca, trello.Defaults()); e != nil {
+			return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetLists: %w", e)
+		}
 	}
 
 	externalCard := entity.Card{

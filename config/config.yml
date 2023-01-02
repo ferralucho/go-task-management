@@ -12,4 +12,4 @@ logger:
 trello:
   trello_developer_public_key: ''
   trello_member_token: ''
-  trello_username: '''
+  trello_username: ''
