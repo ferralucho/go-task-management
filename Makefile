@@ -38,6 +38,10 @@ test: ### run test
 	go test -v -cover -race ./internal/...
 .PHONY: test
 
+integration-test: ### run integration-test
+	go clean -testcache && go test -v ./integration-test/...
+.PHONY: integration-test
+
 mock: ### run mockery
 	mockery --all -r --case snake
 .PHONY: mock
