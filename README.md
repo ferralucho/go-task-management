@@ -12,7 +12,6 @@ See swagger and postman collection in root directory for the requests
 
 Local development:
 ```sh
-$ make compose-up
 $ make run
 ```
 
