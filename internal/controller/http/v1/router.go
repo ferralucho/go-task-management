@@ -18,7 +18,7 @@ import (
 // @title       Management API
 // @description Api for space management
 // @version     1.0
-// @host        localhost:8080
+// @host        localhost:8082
 // @BasePath    /v1
 func NewRouter(handler *gin.Engine, l logger.Interface, t usecase.Card) {
 	// Options
