@@ -18,16 +18,15 @@ type InternalCard struct {
 	Name     string   `json:"name" binding:"required"`
 	Desc     string   `json:"desc"`
 	IdLabels []string `json:"idLabels" binding:"required"`
+	Assign   bool
 }
 
 type Card struct {
 	Name      string   `json:"name" binding:"required"`
 	Desc      string   `json:"desc"`
 	IdList    string   `json:"idList"`
-	IdLabels  []string `json:"idLabels"`
-	ShortLink string   `json:"shortLink"`
-	ShortURL  string   `json:"shortUrl"`
-	URL       string   `json:"url"`
+	IDLabels  []string `json:"idLabels"`
+	IDMembers []string `json:"idMembers"`
 }
 
 type Category string

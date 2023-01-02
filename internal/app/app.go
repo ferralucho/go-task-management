@@ -3,6 +3,7 @@ package app
 
 import (
 	"fmt"
+	"github.com/ferralucho/go-task-management/internal/usecase/repo/trello-api"
 	"os"
 	"os/signal"
 	"syscall"
@@ -12,7 +13,6 @@ import (
 	"github.com/ferralucho/go-task-management/config"
 	v1 "github.com/ferralucho/go-task-management/internal/controller/http/v1"
 	"github.com/ferralucho/go-task-management/internal/usecase"
-	"github.com/ferralucho/go-task-management/internal/usecase/repo"
 	"github.com/ferralucho/go-task-management/pkg/httpserver"
 	"github.com/ferralucho/go-task-management/pkg/logger"
 )
@@ -23,7 +23,7 @@ func Run(cfg *config.Config) {
 
 	// Use case
 	cardUseCase := usecase.New(
-		repo.New(),
+		trello_api.New(),
 	)
 
 	var err error
