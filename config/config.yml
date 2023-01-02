@@ -8,3 +8,8 @@ http:
 logger:
   log_level: 'debug'
   rollbar_env: 'go-task-management'
+
+trello:
+  trello_developer_public_key: ''
+  trello_member_token: ''
+  trello_username: '''

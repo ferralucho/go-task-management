@@ -23,7 +23,7 @@ func Run(cfg *config.Config) {
 
 	// Use case
 	cardUseCase := usecase.New(
-		trello_api.New(),
+		trello_api.New(cfg),
 	)
 
 	var err error

@@ -4,28 +4,28 @@ import (
 	"context"
 	"fmt"
 	"github.com/adlio/trello"
+	"github.com/ferralucho/go-task-management/config"
 	"github.com/ferralucho/go-task-management/internal/entity"
-	"os"
 )
 
 type TrelloApi struct {
-	Client *trello.Client
+	Client   *trello.Client
+	Username string
 }
 
 // New -.
-func New() *TrelloApi {
-	appKey := os.Getenv("TRELLO_DEVELOPER_PUBLIC_KEY")
-	token := os.Getenv("TRELLO_MEMBER_TOKEN")
-	c := trello.NewClient(appKey, token)
+func New(cfg *config.Config) *TrelloApi {
+	c := trello.NewClient(cfg.Trello.PublicKey, cfg.Trello.MemberToken)
 
 	return &TrelloApi{
-		Client: c,
+		Client:   c,
+		Username: cfg.Trello.Username,
 	}
 }
 
 // CreateCard -.
 func (r *TrelloApi) CreateCard(ctx context.Context, card entity.InternalCard) (entity.Card, error) {
-	member, err := r.Client.GetMember(os.Getenv("TRELLO_USERNAME"), trello.Defaults())
+	member, err := r.Client.GetMember(r.Username, trello.Defaults())
 	if err != nil {
 		return entity.Card{}, fmt.Errorf("CardUseCase - CreateCard - Board GetLists: %w", err)
 	}

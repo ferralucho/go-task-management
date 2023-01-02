@@ -9,9 +9,10 @@ import (
 type (
 	// Config -.
 	Config struct {
-		App  `yaml:"app"`
-		HTTP `yaml:"http"`
-		Log  `yaml:"logger"`
+		App    `yaml:"app"`
+		HTTP   `yaml:"http"`
+		Log    `yaml:"logger"`
+		Trello `yaml:"trello"`
 	}
 
 	// App -.
@@ -28,6 +29,13 @@ type (
 	// Log -.
 	Log struct {
 		Level string `env-required:"true" yaml:"log_level"   env:"LOG_LEVEL"`
+	}
+
+	// TrelloApi -.
+	Trello struct {
+		PublicKey   string `env-required:"true" yaml:"trello_developer_public_key"   env:"TRELLO_DEVELOPER_PUBLIC_KEY"`
+		MemberToken string `env-required:"true" yaml:"trello_member_token"   env:"TRELLO_MEMBER_TOKEN"`
+		Username    string `env-required:"true" yaml:"trello_username"   env:"TRELLO_USERNAME"`
 	}
 )
 
