@@ -22,7 +22,7 @@ func New(r CardRepo) *CardUseCase {
 }
 
 func (uc *CardUseCase) CreateTask(ctx context.Context, task entity.Task) (entity.Card, error) {
-	c, err := uc.convertToCard(task.Title, task.Category, []string{task.Category})
+	c, err := uc.convertToCard(task.Title, task.Category, []string{task.Category}, true)
 	card, err := uc.repo.CreateCard(ctx, c)
 	if err != nil {
 		return entity.Card{}, fmt.Errorf("CardUseCase - CreateTask - s.repo.CreateCard: %w", err)
@@ -32,7 +32,7 @@ func (uc *CardUseCase) CreateTask(ctx context.Context, task entity.Task) (entity
 }
 
 func (uc *CardUseCase) CreateIssue(ctx context.Context, issue entity.Issue) (entity.Card, error) {
-	c, err := uc.convertToCard(issue.Title, issue.Description, []string{})
+	c, err := uc.convertToCard(issue.Title, issue.Description, []string{}, false)
 	card, err := uc.repo.CreateCard(ctx, c)
 	if err != nil {
 		return entity.Card{}, fmt.Errorf("CardUseCase - CreateIssue - s.repo.CreateCard: %w", err)
@@ -54,7 +54,7 @@ func (uc *CardUseCase) CreateBug(ctx context.Context, bug entity.Bug) (entity.Ca
 
 	descriptionTitle += strconv.Itoa(rangeIn(0, 1000))
 
-	c, err := uc.convertToCard(descriptionTitle, bug.Description, []string{"Bug"})
+	c, err := uc.convertToCard(descriptionTitle, bug.Description, []string{"Bug"}, true)
 	card, err := uc.repo.CreateCard(ctx, c)
 	if err != nil {
 		return entity.Card{}, fmt.Errorf("CardUseCase - CreateBug - s.repo.CreateCard: %w", err)
@@ -63,11 +63,12 @@ func (uc *CardUseCase) CreateBug(ctx context.Context, bug entity.Bug) (entity.Ca
 	return card, nil
 }
 
-func (uc *CardUseCase) convertToCard(name string, desc string, labels []string) (entity.InternalCard, error) {
+func (uc *CardUseCase) convertToCard(name string, desc string, labels []string, assign bool) (entity.InternalCard, error) {
 	return entity.InternalCard{
 		Name:     name,
 		Desc:     desc,
 		IdLabels: labels,
+		Assign:   assign,
 	}, nil
 }
 
