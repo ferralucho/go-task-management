@@ -5,6 +5,7 @@ See swagger and postman collection in root directory for the requests
 
 ## Content
 - [Quick start](#quick-start)
+- [API](#api)
 - [Project structure](#project-structure)
 - [Dependency Injection](#dependency-injection)
 
@@ -21,6 +22,40 @@ To run it's mandatory to enter the trello config in config.yml
 Local development:
 ```sh
 $ make run
+```
+
+## API
+
+Create task
+```
+curl --location --request POST 'localhost:8082/v1/management/task' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "task",
+    "title": "Clean the rocket",
+    "category": "Maintenance"
+}'
+```
+
+Create issue
+```
+curl --location --request POST 'localhost:8082/v1/management/task' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "issue",
+    "title": "Send message",
+    "description": "Let pilots send messages to central"
+}'
+```
+
+Create bug
+```
+curl --location --request POST 'localhost:8082/v1/management/task' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "bug",
+    "description": "Cockpit is not depressurising correctly"
+}'
 ```
 
 ## Project structure
