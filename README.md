@@ -11,7 +11,7 @@ See swagger and postman collection in root directory for the requests
 
 ## Quick start
 
-To run it's mandatory to enter the trello config in config.yml
+To run it's needed to enter the trello config in config.yml or to set those environment variables (ideally you would set the secrets somewhere else like kubernetes secrets or vault)
 
 ```sh
   trello_developer_public_key:

@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/ilyakaznacheev/cleanenv"
 )
@@ -51,6 +52,18 @@ func NewConfig() (*Config, error) {
 	err = cleanenv.ReadEnv(cfg)
 	if err != nil {
 		return nil, err
+	}
+
+	if cfg.Trello.PublicKey == "" {
+		cfg.Trello.PublicKey = os.Getenv("trello_developer_public_key")
+	}
+
+	if cfg.Trello.MemberToken == "" {
+		cfg.Trello.MemberToken = os.Getenv("trello_member_token")
+	}
+
+	if cfg.Trello.Username == "" {
+		cfg.Trello.Username = os.Getenv("trello_username")
 	}
 
 	return cfg, nil
