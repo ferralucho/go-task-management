@@ -3,6 +3,11 @@
 Go api for trello tasks, clean architecture implementation
 See swagger and postman collection in root directory for the requests
 
+Create task, issues and bug in the to do list of a board
+
+![image](https://user-images.githubusercontent.com/705604/210194009-f07d8daf-aa04-48d1-9bb4-cb3a9ecd4d7e.png)
+
+
 ## Content
 - [Quick start](#quick-start)
 - [API](#api)
