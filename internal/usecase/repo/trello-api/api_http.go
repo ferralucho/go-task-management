@@ -6,6 +6,7 @@ import (
 	"github.com/adlio/trello"
 	"github.com/ferralucho/go-task-management/config"
 	"github.com/ferralucho/go-task-management/internal/entity"
+	"strings"
 )
 
 type TrelloApi struct {
@@ -50,7 +51,7 @@ func (r *TrelloApi) CreateCard(ctx context.Context, card entity.InternalCard) (e
 
 	var list *trello.List
 	for _, v := range lists {
-		if v.Name == "To Do" {
+		if strings.ToLower(v.Name) == "to do" {
 			list = v
 		}
 	}
@@ -70,7 +71,7 @@ func (r *TrelloApi) CreateCard(ctx context.Context, card entity.InternalCard) (e
 	}
 
 	externalCard := entity.Card{
-		Name: card.Name, Desc: card.Desc, IDLabels: card.IdLabels, IDMembers: []string{memberToAssign},
+		Name: card.Name, Desc: card.Desc, IDLabels: card.IdLabels, IDMembers: []string{memberToAssign}, IDList: list.ID,
 	}
 
 	return externalCard, nil

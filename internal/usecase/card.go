@@ -46,9 +46,9 @@ func (uc *CardUseCase) CreateBug(ctx context.Context, bug entity.Bug) (entity.Ca
 	if bug.Description == "" {
 		descriptionTitle += "space-"
 	} else {
-		i := strings.Index(bug.Description, "")
+		i := strings.Index(bug.Description, " ")
 		if i != -1 {
-			descriptionTitle = bug.Description[:i] + "-"
+			descriptionTitle += bug.Description[:i] + "-"
 		}
 	}
 

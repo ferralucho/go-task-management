@@ -24,7 +24,7 @@ type InternalCard struct {
 type Card struct {
 	Name      string   `json:"name" binding:"required"`
 	Desc      string   `json:"desc"`
-	IdList    string   `json:"idList"`
+	IDList    string   `json:"idList"`
 	IDLabels  []string `json:"idLabels"`
 	IDMembers []string `json:"idMembers"`
 }
