@@ -10,6 +10,14 @@ See swagger and postman collection in root directory for the requests
 
 ## Quick start
 
+To run it's mandatory to enter the trello config in config.yml
+
+```sh
+  trello_developer_public_key:
+  trello_member_token:
+  trello_username:
+  ```
+
 Local development:
 ```sh
 $ make run
