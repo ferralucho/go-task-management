@@ -22,6 +22,7 @@ To run it's needed to enter the trello config in config.yml or to set those envi
   trello_developer_public_key:
   trello_member_token:
   trello_username:
+  trello_board: 'space-tasks'
   ```
 
 Local development:
